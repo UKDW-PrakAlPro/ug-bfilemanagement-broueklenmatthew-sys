@@ -21,7 +21,7 @@ Inter 2 - 2 Bayern"""
     with open("PremierLeague.txt", "w") as f: f.write(pl_data)
     with open("UCL.txt", "w") as f: f.write(ucl_data)
 
-# --- BAGIAN 2: FUNGSI PARSE WINNER (SESUAI SOAL) ---
+# BAGIAN 2: FUNGSI PARSE WINNER
 
 def parse_winner(filename):
     try:
@@ -51,10 +51,7 @@ def parse_winner(filename):
     except FileNotFoundError:
         print(f"Error: File '{filename}' tidak ditemukan.")
 
-# --- BAGIAN 3: EKSEKUSI ---
-
-# Jalankan fungsi untuk menyiapkan file terlebih dahulu
-siapkan_data()
+# BAGIAN 3: EKSEKUSI 
 
 print("--- HASIL LALIGA ---")
 parse_winner("LaLiga.txt")
