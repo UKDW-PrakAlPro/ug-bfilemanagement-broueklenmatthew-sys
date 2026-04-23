@@ -1,1 +1,66 @@
+def siapkan_data():
+    laliga_data = """Atletico 4 - 2 Valladolid
+Valencia 1 - 1 Espanyol
+Barcelona 1 - 0 Mallorca
+Getafe 0 - 1 RealMadrid
+Osasuna 1 - 0 Sevilla"""
 
+    pl_data = """ManUnited 0 - 0 ManCity
+Leicester 0 - 3 Newcastle
+Arsenal 1 - 1 Brentford
+Chelsea 1 - 0 Everton
+Liverpool 5 - 1 Tottenham"""
+
+    ucl_data = """Atletico 2 - 4 RealMadrid
+AstonVilla 3 - 2 PSG
+Dortmund 3 - 1 Barcelona
+RealMadrid 1 - 2 Arsenal
+Inter 2 - 2 Bayern"""
+
+    with open("LaLiga.txt", "w") as f: f.write(laliga_data)
+    with open("PremierLeague.txt", "w") as f: f.write(pl_data)
+    with open("UCL.txt", "w") as f: f.write(ucl_data)
+
+# --- BAGIAN 2: FUNGSI PARSE WINNER (SESUAI SOAL) ---
+
+def parse_winner(filename):
+    try:
+        with open(filename, 'r') as file:
+            for baris in file:
+                baris = baris.strip()
+                if not baris:
+                    continue
+                
+                # Memecah baris: [Klub1] [Skor1] - [Skor2] [Klub2]
+                bagian = baris.split()
+                
+                # Mengambil data dari posisi indeks
+                nama_klub1 = bagian[0]
+                skor_klub1 = int(bagian[1])
+                skor_klub2 = int(bagian[3])
+                nama_klub2 = bagian[4]
+                
+                # Menentukan pemenang
+                if skor_klub1 > skor_klub2:
+                    print(f"Winner: {nama_klub1}")
+                elif skor_klub2 > skor_klub1:
+                    print(f"Winner: {nama_klub2}")
+                else:
+                    print("No Winner: Draw")
+                    
+    except FileNotFoundError:
+        print(f"Error: File '{filename}' tidak ditemukan.")
+
+# --- BAGIAN 3: EKSEKUSI ---
+
+# Jalankan fungsi untuk menyiapkan file terlebih dahulu
+siapkan_data()
+
+print("--- HASIL LALIGA ---")
+parse_winner("LaLiga.txt")
+
+print("\n--- HASIL PREMIER LEAGUE ---")
+parse_winner("PremierLeague.txt")
+
+print("\n--- HASIL UCL ---")
+parse_winner("UCL.txt")
